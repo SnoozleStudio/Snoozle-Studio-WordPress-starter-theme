@@ -1,0 +1,5 @@
+{
+  "name": "paolomason/ssgulpwebpacktheme",
+  "description": "Starter Theme with Gulp and Webpack",
+  "type": "wordpress-theme"
+}
