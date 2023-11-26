@@ -24,6 +24,10 @@ include( 'configure/shortcodes.php' );
 
 include( 'configure/acf.php' );
 
+// WALKER
+
+include( 'configure/walker.php' );
+
 // HOOKS ADMIN
 
 if(is_admin()) {

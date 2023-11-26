@@ -5,8 +5,7 @@ function ss_custom_theme_register_menu()
 {
     register_nav_menus(
         array(
-            'menu-main' => __('Menu principal', 'ss'),
-            //'menu-footer' => __( 'Menu footer' ),
+            'main-menu' => __('Main menu', 'ss'),
         )
     );
 }

@@ -1,3 +1,4 @@
+import bootstrap from './_bootstrap';
 import General from './_generalScripts';
 
 const App = {
@@ -10,6 +11,7 @@ const App = {
 		function initGeneral() {
 			return new General();
 		}
+		bootstrap.collapse();
 		initGeneral();
 	}
 
