@@ -20,7 +20,7 @@ function ss_custom_setup()
     add_theme_support('title-tag');
 
     // Automatic Feed Links
-    add_theme_support( 'automatic-feed-links' );
+    add_theme_support('automatic-feed-links');
 
     // Languages
     load_theme_textdomain('ss', get_template_directory() . '/languages');
@@ -66,7 +66,7 @@ add_filter('big_image_size_threshold', '__return_false');
 // Giving credits
 function ss_remove_footer_admin()
 {
-    echo 'Theme created by <a href="https://paolomason.net" target="_blank">Paolo Mason</a>';
+    echo 'Theme by <a href="https://snoozle.studio" target="_blank"><strong>Snoozle</strong>Studio</a>';
 }
 add_filter('admin_footer_text', 'ss_remove_footer_admin');
 

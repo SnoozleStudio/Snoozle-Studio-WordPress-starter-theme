@@ -10,44 +10,94 @@
 
 <body <?php body_class(); ?>>
 	<?php wp_body_open(); ?>
+
+	<div class="bg">
+		<div class="bg-wrapper">
+			<div data-color="#34749A" class="sphere"></div>
+			<div data-color="#2FB489" class="sphere"></div>
+			<div data-color="#34749A" class="sphere"></div>
+			<div data-color="#2FB489" class="sphere"></div>
+			<div data-color="#34749A" class="sphere"></div>
+			<div data-color="#2FB489" class="sphere"></div>
+		</div>
+	</div>
+
 	<div id="page" class="site">
 
-		<header id="masthead" class="site-header">
-
-			<nav class="navbar navbar-expand-lg bg-dark border-bottom border-body" data-bs-theme="dark">
-				<div class="container-fluid">
-					<a class="navbar-brand" href="<?php echo esc_url(home_url('/')); ?>" rel="home">
-						<?php bloginfo('name'); ?>
-					</a>
-					<button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-						data-bs-target="#main-menu" aria-controls="main-menu" aria-expanded="false"
-						aria-label="Toggle navigation">
-						<span class="navbar-toggler-icon"></span>
-					</button>
-
-					<div class="collapse navbar-collapse" id="main-menu">
-						<?php
-						wp_nav_menu(
-							array(
-								'theme_location' => 'main-menu',
-								'container' => false,
-								'menu_class' => '',
-								'fallback_cb' => '__return_false',
-								'items_wrap' => '<ul id="%1$s" class="navbar-nav me-auto mb-2 mb-lg-0 %2$s">%3$s</ul>',
-								'depth' => 2,
-								'walker' => new bootstrap_5_wp_nav_menu_walker()
-							)
-						);
-						?>
-						<form class="d-flex" role="search">
-							<input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-							<button class="btn btn-outline-success" type="submit">Search</button>
-						</form>
+		<header id="masthead" class="site-header fixed-top">
+			<div class="container site-header__wrapper">
+				<div class="d-flex flex-wrap align-items-center justify-content-between py-3 site-header__nav">
+					<div class="site-header__info">
+						<!-- Button trigger modal -->
+						<button type="button" class="btn btn-link text-dark text-decoration-none text-uppercase"
+							data-bs-toggle="modal" data-bs-target="#exampleModal">
+							<svg class="bi">
+								<use
+									xlink:href="<?php echo esc_url(get_template_directory_uri()); ?>/assets/dist/svg/sprite-default.svg#icon-search" />
+							</svg>
+							<!-- <?php esc_html_e('Search', 'ss'); ?> -->
+						</button>
 					</div>
 
-				</div>
-			</nav><!-- .navbar -->
+					<?php
+					// Get the image URL
+					$image_url = get_theme_mod('ss_brand_image_setting');
 
+					// Get the alt text
+					$alt_text = get_theme_mod('ss_brand_alt_text_setting');
+					?>
+					<a href="<?php echo esc_url(home_url('/')); ?>" class="d-flex align-items-center text-decoration-none">
+						<?php if ($image_url) { ?>
+							<img class="site-header__brand" src="<?php echo esc_url($image_url); ?>"
+								alt="<?php echo esc_attr($alt_text); ?>">
+						<?php } else { ?>
+							<?php echo esc_html(get_bloginfo('name')); ?>
+						<?php } ?>
+					</a>
+
+					<div class="site-header__menu d-flex justify-content-end">
+						<button class="btn btn-link text-dark text-decoration-none text-uppercase" type="button"
+							data-bs-toggle="collapse" data-bs-target="#navbarToggleExternalContent"
+							aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
+							<?php esc_html_e('Menu', 'ss'); ?>
+						</button>
+					</div>
+				</div>
+
+				<div class="collapse" id="navbarToggleExternalContent">
+					<div class="p-2">
+						<div class="px-1 py-5" style="font-size: 50px;">
+							<?php
+							wp_nav_menu(
+								array(
+									'theme_location' => 'main-menu',
+								)
+							);
+							?>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="site-header__bg"></div>
 		</header><!-- #masthead -->
+
+		<!-- Modal -->
+		<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+						<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+					</div>
+					<div class="modal-body">
+						<?php echo get_search_form(); ?>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+						<button type="button" class="btn btn-primary">Save changes</button>
+					</div>
+				</div>
+			</div>
+		</div>
 
 		<div id="content" class="site-content">

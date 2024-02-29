@@ -4,7 +4,8 @@
 @import "abstracts/variables-bootstrap";
 
 // vendors
-@import "vendors/bootstrap";
+@import "vendors/bootstrap-icons",
+        "vendors/bootstrap";
 
 // vendors overrides
 // @import "vendors/myvendor";
@@ -20,7 +21,8 @@
         "layout/grid";
 
 // components
-@import "components/buttons",
+@import "components/background",
+        "components/buttons",
         "components/modal";
 
 // pages

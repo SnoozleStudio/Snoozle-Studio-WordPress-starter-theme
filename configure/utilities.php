@@ -69,3 +69,81 @@ if (!function_exists('SS_entry_footer')) {
     );
   }
 }
+
+
+
+
+function ss_customizer_settings($wp_customize)
+{
+  // Add a new section
+  $wp_customize->add_section(
+    'ss_brand_section',
+    array(
+      'title' => __('Brand Section', 'ss'),
+      'priority' => 30, // Adjust priority as needed
+    )
+  );
+
+  // Image setting
+  $wp_customize->add_setting(
+    'ss_brand_image_setting',
+    array(
+      'default' => '',
+      'sanitize_callback' => 'esc_url_raw', // Sanitize callback for the image URL
+    )
+  );
+
+  // Image control
+  $wp_customize->add_control(
+    new WP_Customize_Image_Control(
+      $wp_customize,
+      'ss_brand_image_control',
+      array(
+        'label' => __('Custom Image', 'ss'),
+        'section' => 'ss_brand_section', // Specify the section where you want to add the control
+        'settings' => 'ss_brand_image_setting',
+      )
+    )
+  );
+
+  // Alt text setting
+  $wp_customize->add_setting(
+    'ss_brand_alt_text_setting',
+    array(
+      'default' => '',
+      'sanitize_callback' => 'sanitize_text_field', // Sanitize callback for the alt text
+    )
+  );
+
+  // Alt text control
+  $wp_customize->add_control(
+    'ss_brand_alt_text_control',
+    array(
+      'label' => __('Custom Alt Text', 'ss'),
+      'section' => 'ss_brand_section', // Specify the section where you want to add the control
+      'type' => 'text',
+      'settings' => 'ss_brand_alt_text_setting',
+    )
+  );
+}
+
+add_action('customize_register', 'ss_customizer_settings');
+
+
+
+/**
+ * Generate custom search form
+ *
+ * @param string $form Form HTML.
+ * @return string Modified form HTML.
+ */
+function ss_search_form($form)
+{
+  $form = '<form role="search" method="get" id="searchform" class="searchform d-flex me-3" action="' . home_url('/') . '" >
+	<input type="search" class="form-control me-2 text-bg-light" value="' . get_search_query() . '" name="s" id="s"	placeholder="' . esc_attr_x('Search', 'placeholder', 'ss') . '" />
+	<button type="submit" class="btn btn-outline-secondary" id="searchsubmit">' . esc_html_x('Search', 'submit button', 'ss') . '</button>
+	</form>';
+
+  return $form;
+}
+add_filter('get_search_form', 'ss_search_form');
