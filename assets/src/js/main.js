@@ -1,11 +1,10 @@
 import bootstrap from './_bootstrap';
-import bg from './_bg';
+import background from './_background';
 import header from './_header';
 import content from './_content';
 import General from './_generalScripts';
 
 const App = {
-
 	/**
 	 * App.init
 	 */
@@ -15,12 +14,11 @@ const App = {
 			return new General();
 		}
 		bootstrap.collapse();
-		bg.init();
+		background.init();
 		header.resize();
 		content.init();
 		initGeneral();
-	}
-
+	},
 };
 
 document.addEventListener('DOMContentLoaded', () => {

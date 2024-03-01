@@ -1,6 +1,6 @@
 import gsap from 'gsap';
 
-const bg = {
+const background = {
 	init() {
 		const bgWrapper = document.querySelector('.bg-wrapper');
 		const bgSphere = bgWrapper.querySelectorAll('.sphere');
@@ -37,7 +37,7 @@ const bg = {
 						rotation: getRandomInt(-120, 120), // Added random rotation
 						scale: getRandomInt(89, 144) / 100, // Added random scale
 						opacity: getRandomInt(21, 89) / 100, // Added random opacity
-						duration: getRandomInt(5, 8), // Added random duration
+						// duration: getRandomInt(5, 8), // Added random duration
 					},
 					'<'
 				);
@@ -61,4 +61,4 @@ const bg = {
 	},
 };
 
-export default bg;
+export default background;

@@ -11,16 +11,7 @@
 <body <?php body_class(); ?>>
 	<?php wp_body_open(); ?>
 
-	<div class="bg">
-		<div class="bg-wrapper">
-			<div data-color="#34749A" class="sphere"></div>
-			<div data-color="#2FB489" class="sphere"></div>
-			<div data-color="#34749A" class="sphere"></div>
-			<div data-color="#2FB489" class="sphere"></div>
-			<div data-color="#34749A" class="sphere"></div>
-			<div data-color="#2FB489" class="sphere"></div>
-		</div>
-	</div>
+	<?php get_template_part('template-parts/background'); ?>
 
 	<div id="page" class="site">
 
@@ -31,11 +22,11 @@
 						<!-- Button trigger modal -->
 						<button type="button" class="btn btn-link text-dark text-decoration-none text-uppercase"
 							data-bs-toggle="modal" data-bs-target="#exampleModal">
-							<svg class="bi">
+							<!-- <svg class="bi">
 								<use
 									xlink:href="<?php echo esc_url(get_template_directory_uri()); ?>/assets/dist/svg/sprite-default.svg#icon-search" />
-							</svg>
-							<!-- <?php esc_html_e('Search', 'ss'); ?> -->
+							</svg> -->
+							<?php esc_html_e('Search', 'ss'); ?>
 						</button>
 					</div>
 
