@@ -37,12 +37,15 @@
 					// Get the alt text
 					$alt_text = get_theme_mod('ss_brand_alt_text_setting');
 					?>
-					<a href="<?php echo esc_url(home_url('/')); ?>" class="d-flex align-items-center text-decoration-none">
+					<a href="<?php echo esc_url(home_url('/')); ?>" class="d-flex flex-column align-items-center text-decoration-none">
 						<?php if ($image_url) { ?>
 							<img class="site-header__brand" src="<?php echo esc_url($image_url); ?>"
 								alt="<?php echo esc_attr($alt_text); ?>">
 						<?php } else { ?>
 							<?php echo esc_html(get_bloginfo('name')); ?>
+							<span class="tagline">
+								<?php echo esc_html(get_bloginfo('description')); ?>
+							</span>
 						<?php } ?>
 					</a>
 
