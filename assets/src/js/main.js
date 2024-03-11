@@ -1,3 +1,4 @@
+import WebFont from 'webfontloader';
 import bootstrap from './_bootstrap';
 import background from './_background';
 import header from './_header';
@@ -22,5 +23,12 @@ const App = {
 };
 
 document.addEventListener('DOMContentLoaded', () => {
-	App.init();
+	WebFont.load({
+		google: {
+			families: ['PT Sans'],
+		},
+		active() {
+			App.init();
+		},
+	});
 });

@@ -12,7 +12,7 @@
   opacity: .21;
   user-select: none;
   pointer-events: none;
-
+  
   &-wrapper {
     display: block;
     width: 100%;
@@ -22,7 +22,9 @@
     user-select: none;
     z-index: 10;
     mix-blend-mode: multiply;
-
+    user-select: none;
+    pointer-events: none;
+    
     .sphere {
       pointer-events: none;
       user-select: none;
@@ -31,6 +33,8 @@
       mix-blend-mode: lighten;
       mix-blend-mode: plus-lighter;
       filter: blur(min(13vw, 13vh));
+      user-select: none;
+      pointer-events: none;
     }
   }
 }
