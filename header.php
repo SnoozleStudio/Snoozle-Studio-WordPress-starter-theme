@@ -16,19 +16,9 @@
 	<div id="page" class="site">
 
 		<header id="masthead" class="site-header fixed-top">
-			<div class="container site-header__wrapper">
-				<div class="d-flex flex-wrap align-items-center justify-content-between py-3 site-header__nav">
-					<div class="site-header__info">
-						<!-- Button trigger modal -->
-						<button type="button" class="btn btn-link text-dark text-decoration-none text-uppercase"
-							data-bs-toggle="modal" data-bs-target="#exampleModal">
-							<!-- <svg class="bi">
-								<use
-									xlink:href="<?php echo esc_url(get_template_directory_uri()); ?>/assets/dist/svg/sprite-default.svg#icon-search" />
-							</svg> -->
-							<?php esc_html_e('Search', 'ss'); ?>
-						</button>
-					</div>
+			<div class="container-fluid site-header__wrapper">
+				<div class="d-flex flex-wrap align-items-center justify-content-between px-5 py-4 site-header__nav">
+
 
 					<?php
 					// Get the image URL
@@ -37,10 +27,11 @@
 					// Get the alt text
 					$alt_text = get_theme_mod('ss_brand_alt_text_setting');
 					?>
-					<a href="<?php echo esc_url(home_url('/')); ?>" class="d-flex flex-column align-items-center text-decoration-none">
+					<a href="<?php echo esc_url(home_url('/')); ?>"
+						class="site-header__brand d-flex flex-column align-items-center text-decoration-none">
 						<?php if ($image_url) { ?>
-							<img class="site-header__brand" src="<?php echo esc_url($image_url); ?>"
-								alt="<?php echo esc_attr($alt_text); ?>">
+							<img class="site-header__brand--img" src="<?php echo esc_url($image_url); ?>" alt="<?php echo esc_attr($alt_text); ?>">
+							<div class="site-header__brand--light"></div>
 						<?php } else { ?>
 							<?php echo esc_html(get_bloginfo('name')); ?>
 							<span class="tagline">
@@ -50,7 +41,7 @@
 					</a>
 
 					<div class="site-header__menu d-flex justify-content-end">
-						<button class="btn btn-link text-dark text-decoration-none text-uppercase" type="button"
+						<button class="site-header__btn btn btn-link text-dark text-decoration-none text-uppercase" type="button"
 							data-bs-toggle="collapse" data-bs-target="#navbarToggleExternalContent"
 							aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
 							<?php esc_html_e('Menu', 'ss'); ?>
@@ -58,8 +49,8 @@
 					</div>
 				</div>
 
-				<div class="collapse" id="navbarToggleExternalContent">
-					<div class="p-2">
+				<div class="site-header__collapse collapse" id="navbarToggleExternalContent">
+					<div class="p-2 w-100">
 						<div class="px-1 py-5" style="font-size: 50px;">
 							<?php
 							wp_nav_menu(

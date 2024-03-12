@@ -17,6 +17,7 @@ const App = {
 		bootstrap.collapse();
 		background.init();
 		header.resize();
+		header.toggler();
 		content.init();
 		initGeneral();
 	},

@@ -20,3 +20,8 @@
 // .transition, %transition {
 //     transition:all 0.3s ease-in-out;
 // }
+
+.site {
+  position: relative;
+  z-index: 2;
+}
