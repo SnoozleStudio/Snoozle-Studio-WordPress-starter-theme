@@ -22,7 +22,11 @@ const header = {
 	},
 	toggler() {
 		const toggleBtn = document.querySelector('header .site-header__btn');
+		const toggleBtnSpans = toggleBtn.querySelectorAll('span');
 		const headerBg = document.querySelector('header .site-header__bg');
+		const headerContent = document.querySelector(
+			'header .site-header__content'
+		);
 		const headerWrapper = document.querySelector(
 			'header .site-header__wrapper'
 		);
@@ -30,17 +34,24 @@ const header = {
 		let isOpen = false;
 
 		toggleBtn.addEventListener('click', () => {
+			toggleBtnSpans.forEach((el) => {
+				el.classList.toggle('site-header__btn--hide');
+			});
+
 			if (!isOpen) {
 				// Change background color to black
 				gsap.to(headerBg, {
 					backgroundColor: '#193a4d',
 					opacity: 0.34,
-					// duration: 0.34,
 					ease: 'power2.inOut',
 				});
 				gsap.to(headerWrapper, {
 					backdropFilter: 'blur(21px)',
-					// duration: 0.34,
+					ease: 'power2.inOut',
+				});
+				gsap.to(headerContent, {
+					opacity: 1,
+					delay: 0.34,
 					ease: 'power2.inOut',
 				});
 				isOpen = true;
@@ -49,12 +60,14 @@ const header = {
 				gsap.to(headerBg, {
 					backgroundColor: '#193a4d',
 					opacity: 0,
-					// duration: 0.34,
 					ease: 'power2.inOut',
 				});
 				gsap.to(headerWrapper, {
 					backdropFilter: 'blur(0px)',
-					// duration: 0.34,
+					ease: 'power2.inOut',
+				});
+				gsap.to(headerContent, {
+					opacity: 0,
 					ease: 'power2.inOut',
 				});
 				isOpen = false;
@@ -81,6 +94,59 @@ const header = {
 				});
 			}
 		});
+
+		// // Get the text content of the button
+		// const buttonContent =
+		// 	document.querySelector('.site-header__btn').textContent;
+
+		// // Remove leading and trailing whitespace from the button content
+		// const trimmedContent = buttonContent.trim();
+
+		// // Split the text content into an array of characters
+		// const buttonCharArray = trimmedContent.split('');
+
+		// let buttonHTML = '';
+
+		// // Construct HTML markup for each non-space character
+		// buttonCharArray.forEach((char) => {
+		// 	if (char !== ' ') {
+		// 		buttonHTML +=
+		// 			'<span class="single-box"><span class="single-char">' +
+		// 			char +
+		// 			'</span><span class="single-char">' +
+		// 			char +
+		// 			'</span></span>';
+		// 	}
+		// });
+
+		// // Append the generated HTML markup to the button
+		// document.querySelector('.site-header__btn').innerHTML = buttonHTML;
+
+		// // Select all the characters within the button
+		// const chars = document.querySelectorAll('.single-char');
+
+		// // Add event listeners for mouse enter and mouse leave events
+		// document
+		// 	.querySelector('.site-header__btn')
+		// 	.addEventListener('mouseenter', () => {
+		// 		gsap.to(chars, {
+		// 			y: '-100%',
+		// 			repeat: 0,
+		// 			stagger: 0.034,
+		// 			duration: 0.34,
+		// 		});
+		// 	});
+
+		// document
+		// 	.querySelector('.site-header__btn')
+		// 	.addEventListener('mouseleave', () => {
+		// 		gsap.to(chars, {
+		// 			y: '0%',
+		// 			repeat: 0,
+		// 			stagger: 0.034,
+		// 			duration: 0.34,
+		// 		});
+		// 	});
 	},
 };
 

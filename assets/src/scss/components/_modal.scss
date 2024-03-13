@@ -1,0 +1,12 @@
+.contacts-modal {
+  &-dialog {
+    @include media-breakpoint-up(sm) {
+      max-width: calc(100vw - 120px);
+    }
+
+    .ss-bg-blur {
+      background-color: rgba($white, .05);
+      backdrop-filter: blur(10px);
+    }
+  }
+}

@@ -125,6 +125,81 @@ function ss_customizer_settings($wp_customize)
       'settings' => 'ss_brand_alt_text_setting',
     )
   );
+
+
+
+  // Add a new section
+  $wp_customize->add_section(
+    'ss_contacts_section',
+    array(
+      'title' => __('Contacts Section', 'ss'),
+      'priority' => 40, // Adjust priority as needed
+    )
+  );
+
+  // Image setting
+  $wp_customize->add_setting(
+    'ss_contacts_image_setting',
+    array(
+      'default' => '',
+      'sanitize_callback' => 'esc_url_raw', // Sanitize callback for the image URL
+    )
+  );
+
+  // Image control
+  $wp_customize->add_control(
+    new WP_Customize_Image_Control(
+      $wp_customize,
+      'ss_contacts_image_control',
+      array(
+        'label' => __('Contacts Image', 'ss'),
+        'section' => 'ss_contacts_section', // Specify the section where you want to add the control
+        'settings' => 'ss_contacts_image_setting',
+      )
+    )
+  );
+
+
+  // Contacts image alt text setting
+  $wp_customize->add_setting(
+    'ss_contacts_image_alt_text_setting',
+    array(
+      'default' => '',
+      'sanitize_callback' => 'sanitize_text_field', // Sanitize callback for the alt text
+    )
+  );
+
+  // Alt text control
+  $wp_customize->add_control(
+    'ss_contacts_image_alt_text_control',
+    array(
+      'label' => __('Contacts image Alt Text', 'ss'),
+      'section' => 'ss_contacts_section', // Specify the section where you want to add the control
+      'type' => 'text',
+      'settings' => 'ss_contacts_image_alt_text_setting',
+    )
+  );
+
+
+  // Address setting
+  $wp_customize->add_setting(
+    'ss_contacts_address_setting',
+    array(
+      'default' => '',
+      'sanitize_callback' => 'sanitize_text_field', // Sanitize callback for the alt text
+    )
+  );
+
+  // Address control
+  $wp_customize->add_control(
+    'ss_contacts_address_control',
+    array(
+      'label' => __('Address', 'ss'),
+      'section' => 'ss_contacts_section', // Specify the section where you want to add the control
+      'type' => 'text',
+      'settings' => 'ss_contacts_address_setting',
+    )
+  );
 }
 
 add_action('customize_register', 'ss_customizer_settings');
