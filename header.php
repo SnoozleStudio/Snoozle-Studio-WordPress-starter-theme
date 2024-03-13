@@ -41,7 +41,7 @@
 					</a>
 
 					<div class="site-header__menu d-flex justify-content-end">
-						<button class="site-header__btn btn btn-link text-dark text-decoration-none text-uppercase" type="button"
+						<button class="site-header__btn btn btn-link text-white text-decoration-none" type="button"
 							data-bs-toggle="collapse" data-bs-target="#navbarToggleExternalContent"
 							aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
 							<?php esc_html_e('Menu', 'ss'); ?>
@@ -51,7 +51,7 @@
 
 				<div class="site-header__collapse collapse" id="navbarToggleExternalContent">
 					<div class="p-2 w-100">
-						<div class="px-1 py-5" style="font-size: 50px;">
+						<div class="px-1 py-5">
 							<?php
 							wp_nav_menu(
 								array(

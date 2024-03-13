@@ -18,8 +18,8 @@ const background = {
 			el.style.backgroundColor = el.dataset.color;
 			el.style.top = `${getRandomInt(40, 60)}%`;
 			el.style.left = `${getRandomInt(40, 60)}%`;
-			el.style.width = `${getRandomInt(55, 144)}vw`;
-			el.style.height = `${getRandomInt(55, 144)}vh`;
+			el.style.width = `${getRandomInt(89, 144)}vw`;
+			el.style.height = `${getRandomInt(89, 144)}vh`;
 			el.style.borderRadius = `${getRandomInt(0, 100)}%`;
 		}
 
@@ -35,8 +35,8 @@ const background = {
 						x: `${xSign}${getRandomInt(0, hVW)}`,
 						y: `${ySign}${getRandomInt(0, hVH)}`,
 						rotation: getRandomInt(-120, 120), // Added random rotation
-						scale: getRandomInt(89, 144) / 100, // Added random scale
-						opacity: getRandomInt(21, 89) / 100, // Added random opacity
+						// scale: getRandomInt(144, 144) / 100, // Added random scale
+						opacity: getRandomInt(13, 55) / 100, // Added random opacity
 						// duration: getRandomInt(5, 8), // Added random duration
 					},
 					'<'

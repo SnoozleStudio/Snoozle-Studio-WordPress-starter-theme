@@ -34,12 +34,14 @@ const header = {
 				// Change background color to black
 				gsap.to(headerBg, {
 					backgroundColor: '#193a4d',
-					opacity: 0.55,
-					duration: 0.34,
+					opacity: 0.34,
+					// duration: 0.34,
 					ease: 'power2.inOut',
 				});
 				gsap.to(headerWrapper, {
 					backdropFilter: 'blur(21px)',
+					// duration: 0.34,
+					ease: 'power2.inOut',
 				});
 				isOpen = true;
 			} else {
@@ -47,13 +49,36 @@ const header = {
 				gsap.to(headerBg, {
 					backgroundColor: '#193a4d',
 					opacity: 0,
-					duration: 0,
+					// duration: 0.34,
 					ease: 'power2.inOut',
 				});
 				gsap.to(headerWrapper, {
-					backdropFilter: 'blur(0)',
+					backdropFilter: 'blur(0px)',
+					// duration: 0.34,
+					ease: 'power2.inOut',
 				});
 				isOpen = false;
+			}
+		});
+
+		const menuItems = document.querySelectorAll('.menu > li');
+
+		menuItems.forEach((item) => {
+			// const parentLink = item.querySelector('a');
+			const subMenu = item.querySelector('.sub-menu');
+
+			if (subMenu) {
+				item.classList.add('has-child');
+				item.addEventListener('mouseenter', () => {
+					subMenu.style.display = 'block';
+				});
+
+				item.addEventListener('mouseleave', (event) => {
+					// Check if mouse leaves the menu item and its children
+					if (!item.contains(event.relatedTarget)) {
+						subMenu.style.display = 'none';
+					}
+				});
 			}
 		});
 	},

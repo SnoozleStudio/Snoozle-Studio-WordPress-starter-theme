@@ -11,7 +11,7 @@
   overflow: hidden;
   user-select: none;
   pointer-events: none;
-  background-color: #aaa;
+  background-color: #75a495;
   // background: linear-gradient(rgba(#2FB489,.55) 0, rgba(#34749A,.55) 100%);
   // background: radial-gradient(rgba(#2FB489,.55) 0, rgba(#34749A,.55) 100%);
   
@@ -24,13 +24,13 @@
     mix-blend-mode: multiply;
     user-select: none;
     pointer-events: all;
-    opacity: .89;
+    opacity: .34;
     
     .sphere {
       position: absolute;
       transform: translate(-50%, -50%);
       mix-blend-mode: lighten;
-      // mix-blend-mode: plus-lighter;
+      mix-blend-mode: plus-lighter;
       // mix-blend-mode: darken;
       filter: blur(min(13vw, 13vh));
       user-select: none;
