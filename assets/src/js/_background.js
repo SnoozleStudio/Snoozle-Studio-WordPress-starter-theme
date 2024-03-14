@@ -43,9 +43,9 @@ const background = {
 				);
 			});
 
-			document.body.addEventListener('mousemove', (e) => {
-				const x = hVW - e.pageX;
-				const y = hVH - e.pageY;
+			bg.addEventListener('mousemove', (e) => {
+				const x = hVW - e.offsetX;
+				const y = hVH - e.offsetY;
 				const distance = Math.sqrt(x ** 2 + y ** 2) / 2;
 				tlHero.progress((distance / maxDist) * 2);
 			});

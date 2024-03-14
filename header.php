@@ -62,16 +62,130 @@
 				</div>
 
 				<div class="site-header__collapse collapse" id="navbarToggleExternalContent">
-					<div class="p-2 w-100">
+					<div class="w-100 py-5">
 						<div class="site-header__content">
-							<?php
-							wp_nav_menu(
-								array(
-									'theme_location' => 'main-menu',
-									'walker' => new Main_Vadini_Nav_Walker()
-								)
-							);
-							?>
+							<div class="d-flex justify-content-between">
+								<?php
+								wp_nav_menu(
+									array(
+										'theme_location' => 'main-menu',
+										'container' => false,
+										'walker' => new Main_Vadini_Nav_Walker()
+									)
+								);
+								?>
+
+								<div class="site-header__contacts">
+
+
+
+
+									<?php
+									// Retrieve the value of the telephone number setting
+									$ss_telephone_number = get_theme_mod('ss_contacts_telephone_setting', '');
+									$ss_mobile_phone_number = get_theme_mod('ss_contacts_mobile_phone_setting', '');
+									$ss_email_address = get_theme_mod('ss_contacts_email_setting', '');
+									?>
+
+									<?php
+									// Check if the telephone number value is not empty before displaying it
+									if (!empty($ss_telephone_number) || !empty($ss_mobile_phone_number) || !empty($ss_email_address)) {
+										?>
+
+
+
+										<div class="site-header__contacts-type">
+											<div class="site-header__contacts-type-info">
+												<?php esc_html_e('Contacts', 'ss'); ?>
+											</div>
+											<div class="site-header__contacts-type-data">
+
+
+												<?php if (!empty($ss_telephone_number)) { ?>
+													<?php $href_telephone_number = str_replace(' ', '', $ss_telephone_number); ?>
+													<div>
+														<span>
+															<?php esc_html_e('Telephone', 'ss'); ?>
+														</span>
+														<a href="tel:<?php echo esc_attr($href_telephone_number); ?>">
+															<?php echo esc_html($ss_telephone_number); ?>
+														</a>
+													</div>
+												<?php } ?>
+
+												<?php if (!empty($ss_mobile_phone_number)) { ?>
+													<?php $href_mobile_number = str_replace(' ', '', $ss_mobile_phone_number); ?>
+													<div>
+														<span>
+															<?php esc_html_e('Mobile', 'ss'); ?>
+														</span>
+														<a href="tel:<?php echo esc_attr($href_mobile_number); ?>">
+															<?php echo esc_html($ss_mobile_phone_number); ?>
+														</a>
+													</div>
+												<?php } ?>
+
+												<?php if (!empty($ss_email_address)) { ?>
+													<div>
+														<span>
+															<?php esc_html_e('Email', 'ss'); ?>
+														</span>
+														<a href="mailto:<?php echo antispambot($ss_email_address); ?>">
+															<?php echo esc_html($ss_email_address); ?>
+														</a>
+													</div>
+												<?php } ?>
+
+
+											</div>
+										</div>
+									<?php } ?>
+
+
+
+
+
+									<?php
+									// Get the address
+									$ss_contacts_address = get_theme_mod('ss_contacts_address_setting', '');
+									?>
+									<?php if (!empty($ss_contacts_address)) { ?>
+										<div class="site-header__contacts-type">
+											<div class="site-header__contacts-type-info">
+												<?php esc_html_e('Address', 'ss'); ?>
+											</div>
+											<div>
+												<?php echo wpautop($ss_contacts_address); ?>
+											</div>
+										</div>
+									<?php } ?>
+
+
+									<?php
+									// Retrieve the value of the "Working Hours" setting
+									$ss_working_hours = get_theme_mod('ss_contacts_working_hours_setting', '');
+									?>
+
+									<?php
+									// Check if the working hours value is not empty before displaying it
+									if (!empty($ss_working_hours)) {
+										?>
+										<div class="site-header__contacts-type">
+											<div class="site-header__contacts-type-info">
+												<?php esc_html_e('Hours', 'ss'); ?>
+											</div>
+											<div>
+												<?php echo wpautop($ss_working_hours); ?>
+											</div>
+										</div>
+									<?php } ?>
+								</div>
+
+
+
+
+
+							</div>
 						</div>
 					</div>
 				</div>

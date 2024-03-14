@@ -4,6 +4,7 @@ import background from './_background';
 import header from './_header';
 import content from './_content';
 import General from './_generalScripts';
+// import scroll from './_lenis';
 
 const App = {
 	/**
@@ -19,6 +20,7 @@ const App = {
 		header.resize();
 		header.toggler();
 		content.init();
+		// scroll.control();
 		initGeneral();
 	},
 };

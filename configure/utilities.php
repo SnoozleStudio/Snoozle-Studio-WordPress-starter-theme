@@ -181,12 +181,91 @@ function ss_customizer_settings($wp_customize)
   );
 
 
+
+
+
+
+
+  // Telephone setting
+  $wp_customize->add_setting(
+    'ss_contacts_telephone_setting',
+    array(
+      'default' => '',
+      'sanitize_callback' => 'sanitize_text_field', // Sanitize callback for the telephone number
+    )
+  );
+
+  // Telephone control
+  $wp_customize->add_control(
+    'ss_contacts_telephone_control',
+    array(
+      'label' => __('Telephone', 'ss'),
+      'section' => 'ss_contacts_section', // Specify the section where you want to add the control
+      'type' => 'tel', // Set the type to tel for telephone input
+      'settings' => 'ss_contacts_telephone_setting',
+    )
+  );
+
+
+
+
+
+  // Mobile Phone setting
+  $wp_customize->add_setting(
+    'ss_contacts_mobile_phone_setting',
+    array(
+      'default' => '',
+      'sanitize_callback' => 'sanitize_text_field', // Sanitize callback for the mobile phone number
+    )
+  );
+
+  // Mobile Phone control
+  $wp_customize->add_control(
+    'ss_contacts_mobile_phone_control',
+    array(
+      'label' => __('Mobile Phone', 'ss'),
+      'section' => 'ss_contacts_section', // Specify the section where you want to add the control
+      'type' => 'tel', // Set the type to tel for telephone input
+      'settings' => 'ss_contacts_mobile_phone_setting',
+    )
+  );
+
+
+
+
+
+  // Email setting
+  $wp_customize->add_setting(
+    'ss_contacts_email_setting',
+    array(
+      'default' => '',
+      'sanitize_callback' => 'sanitize_email', // Sanitize callback for the email address
+    )
+  );
+
+  // Email control
+  $wp_customize->add_control(
+    'ss_contacts_email_control',
+    array(
+      'label' => __('Email', 'ss'),
+      'section' => 'ss_contacts_section', // Specify the section where you want to add the control
+      'type' => 'email', // Set the type to email for email input
+      'settings' => 'ss_contacts_email_setting',
+    )
+  );
+
+
+
+
+
+
+
   // Address setting
   $wp_customize->add_setting(
     'ss_contacts_address_setting',
     array(
       'default' => '',
-      'sanitize_callback' => 'sanitize_text_field', // Sanitize callback for the alt text
+      'sanitize_callback' => 'wp_kses_post',
     )
   );
 
@@ -195,9 +274,30 @@ function ss_customizer_settings($wp_customize)
     'ss_contacts_address_control',
     array(
       'label' => __('Address', 'ss'),
-      'section' => 'ss_contacts_section', // Specify the section where you want to add the control
-      'type' => 'text',
+      'section' => 'ss_contacts_section',
+      'type' => 'textarea',
       'settings' => 'ss_contacts_address_setting',
+    )
+  );
+
+
+  // Working Hours setting
+  $wp_customize->add_setting(
+    'ss_contacts_working_hours_setting',
+    array(
+      'default' => '',
+      'sanitize_callback' => 'wp_kses_post',
+    )
+  );
+
+  // Working Hours control
+  $wp_customize->add_control(
+    'ss_contacts_working_hours_control',
+    array(
+      'label' => __('Working Hours', 'ss'),
+      'section' => 'ss_contacts_section',
+      'type' => 'textarea',
+      'settings' => 'ss_contacts_working_hours_setting',
     )
   );
 }
@@ -222,3 +322,47 @@ function ss_search_form($form)
   return $form;
 }
 add_filter('get_search_form', 'ss_search_form');
+
+
+
+
+
+
+
+
+
+function wpturbo_handle_upload_convert_to_webp($upload)
+{
+  if ($upload['type'] == 'image/jpeg' || $upload['type'] == 'image/png' || $upload['type'] == 'image/gif') {
+    $file_path = $upload['file'];
+
+    // Check if ImageMagick or GD is available
+    if (extension_loaded('imagick') || extension_loaded('gd')) {
+      $image_editor = wp_get_image_editor($file_path);
+      if (!is_wp_error($image_editor)) {
+        $file_info = pathinfo($file_path);
+        $dirname = $file_info['dirname'];
+        $filename = $file_info['filename'];
+
+        // Create a new file path for the WebP image
+        $new_file_path = $dirname . '/' . $filename . '.webp';
+
+        // Attempt to save the image in WebP format
+        $saved_image = $image_editor->save($new_file_path, 'image/webp');
+        if (!is_wp_error($saved_image) && file_exists($saved_image['path'])) {
+          // Success: replace the uploaded image with the WebP image
+          $upload['file'] = $saved_image['path'];
+          $upload['url'] = str_replace(basename($upload['url']), basename($saved_image['path']), $upload['url']);
+          $upload['type'] = 'image/webp';
+
+          // Optionally remove the original image
+          @unlink($file_path);
+        }
+      }
+    }
+  }
+
+  return $upload;
+}
+
+add_filter('wp_handle_upload', 'wpturbo_handle_upload_convert_to_webp');

@@ -39,9 +39,13 @@ const header = {
 			});
 
 			if (!isOpen) {
+				document.body.style.overflow = 'hidden';
+
 				// Change background color to black
 				gsap.to(headerBg, {
 					backgroundColor: '#193a4d',
+					// eslint-disable-next-line max-len
+					// background: 'linear-gradient(to bottom,  rgba(0,0,0,0.89) 0%,rgba(0,0,0,0.34) 50%,rgba(0,0,0,0.89) 100%)',
 					opacity: 0.34,
 					ease: 'power2.inOut',
 				});
@@ -56,9 +60,9 @@ const header = {
 				});
 				isOpen = true;
 			} else {
-				// Change background color to original
-				gsap.to(headerBg, {
-					backgroundColor: '#193a4d',
+				document.body.style.overflow = 'auto';
+
+				gsap.to(headerContent, {
 					opacity: 0,
 					ease: 'power2.inOut',
 				});
@@ -66,7 +70,9 @@ const header = {
 					backdropFilter: 'blur(0px)',
 					ease: 'power2.inOut',
 				});
-				gsap.to(headerContent, {
+				// Change background color to original
+				gsap.to(headerBg, {
+					backgroundColor: '#193a4d',
 					opacity: 0,
 					ease: 'power2.inOut',
 				});
@@ -77,6 +83,29 @@ const header = {
 		const menuItems = document.querySelectorAll('.menu > li');
 
 		menuItems.forEach((item) => {
+			item.addEventListener('mouseenter', () => {
+				menuItems.forEach((otherItem) => {
+					if (otherItem !== item) {
+						gsap.to(otherItem, {
+							opacity: 0.55,
+							ease: 'power2.inOut',
+						});
+					}
+				});
+			});
+
+			item.addEventListener('mouseleave', (event) => {
+				// Check if mouse leaves the menu item and its children
+				if (!item.contains(event.relatedTarget)) {
+					menuItems.forEach((otherItem) => {
+						gsap.to(otherItem, {
+							opacity: 1,
+							ease: 'power2.inOut',
+						});
+					});
+				}
+			});
+
 			// const parentLink = item.querySelector('a');
 			const subMenu = item.querySelector('.sub-menu');
 
@@ -94,59 +123,6 @@ const header = {
 				});
 			}
 		});
-
-		// // Get the text content of the button
-		// const buttonContent =
-		// 	document.querySelector('.site-header__btn').textContent;
-
-		// // Remove leading and trailing whitespace from the button content
-		// const trimmedContent = buttonContent.trim();
-
-		// // Split the text content into an array of characters
-		// const buttonCharArray = trimmedContent.split('');
-
-		// let buttonHTML = '';
-
-		// // Construct HTML markup for each non-space character
-		// buttonCharArray.forEach((char) => {
-		// 	if (char !== ' ') {
-		// 		buttonHTML +=
-		// 			'<span class="single-box"><span class="single-char">' +
-		// 			char +
-		// 			'</span><span class="single-char">' +
-		// 			char +
-		// 			'</span></span>';
-		// 	}
-		// });
-
-		// // Append the generated HTML markup to the button
-		// document.querySelector('.site-header__btn').innerHTML = buttonHTML;
-
-		// // Select all the characters within the button
-		// const chars = document.querySelectorAll('.single-char');
-
-		// // Add event listeners for mouse enter and mouse leave events
-		// document
-		// 	.querySelector('.site-header__btn')
-		// 	.addEventListener('mouseenter', () => {
-		// 		gsap.to(chars, {
-		// 			y: '-100%',
-		// 			repeat: 0,
-		// 			stagger: 0.034,
-		// 			duration: 0.34,
-		// 		});
-		// 	});
-
-		// document
-		// 	.querySelector('.site-header__btn')
-		// 	.addEventListener('mouseleave', () => {
-		// 		gsap.to(chars, {
-		// 			y: '0%',
-		// 			repeat: 0,
-		// 			stagger: 0.034,
-		// 			duration: 0.34,
-		// 		});
-		// 	});
 	},
 };
 
